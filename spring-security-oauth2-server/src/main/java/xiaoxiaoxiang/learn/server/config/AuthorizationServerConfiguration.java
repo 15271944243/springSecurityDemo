@@ -53,4 +53,18 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 // 注册回调地址
                 .redirectUris("http://www.funtl.com");
     }
+//    权限控制模型
+//    RBAC（Role-Based Access Control，基于角色的访问控制）
+//    ACL （Access Control List，访问控制列表）
+//    ABAC（Attribute-Based Access Control，基于属性的访问控制）
+//    PBAC（Policy-Based Access Control，基于策略的访问控制）
+
+//    RBAC 是什么: 权限控制模型
+//         做什么:
+//            who 资源所有者
+//            what 能访问哪些资源
+//            how 具体怎么访问
+//         怎么用
+//
+//
 }
