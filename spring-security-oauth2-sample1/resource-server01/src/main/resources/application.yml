@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: oauth2-resource-server01
+  redis:
+    host: 127.0.0.1
+    port: 6379
+#  security:
+#    oauth2:
+#      client:
+#        client-id: client01
+#        client-secret: secret01
+#      resource:
+#        tokenInfoUri: https://127.0.0.1:8079/auth/oauth/check_token
+      #resourceserver:
+        #jwt:
+          #jwk-set-uri: ${mockwebserver.url}/.well-known/jwks.json
+          #issuer-uri: https://127.0.0.1:8079/issuer
+
+
+server:
+  port: 8078
+  servlet:
+    context-path: /resource01
