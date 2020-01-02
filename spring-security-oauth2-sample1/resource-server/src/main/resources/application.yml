@@ -1,12 +1,11 @@
 spring:
   application:
-    name: oauth2-authorization-server
+    name: oauth2-resource-server
   redis:
     host: 127.0.0.1
     port: 6379
 
 server:
-  port: 8079
+  port: 8078
   servlet:
-    context-path: /auth
-
+    context-path: /resource

@@ -1,4 +1,4 @@
-package xiaoxiaoxiang.learn.config;
+package learn.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

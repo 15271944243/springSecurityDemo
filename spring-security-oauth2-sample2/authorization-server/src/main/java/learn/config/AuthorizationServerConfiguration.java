@@ -1,4 +1,4 @@
-package xiaoxiaoxiang.learn.config;
+package learn.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
@@ -26,6 +27,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
 
     /**
      * 也可以在配置文件里进行配置
@@ -47,6 +51,14 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        /**
+         * 由于`/oauth/check_token`默认的访问权限是denyAll(),这里要改成认证成功后可访问权限:isAuthenticated()
+         */
+        security.checkTokenAccess("isAuthenticated()");
+    }
+
+    @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(tokenStore());
     }
@@ -54,6 +66,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Bean
     public TokenStore tokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
+//        return new JwtTokenStore(accessTokenConverter());
     }
 
 }

@@ -21,6 +21,7 @@
         <module>spring-security-sample1</module>
         <module>spring-security-sample2</module>
         <module>spring-security-oauth2-sample1</module>
+        <module>spring-security-oauth2-sample2</module>
     </modules>
 
     <properties>

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: oauth2-authorization-server
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+#security:
+#  oauth2:
+#    client:
+#      client-id: client01
+#      client-secret: secret01
+#      authorized-grant-types: authorization_code
+#      scope: app
+#      registered-redirect-uri: https://www.baidu.com
+
+server:
+  port: 8079
+  servlet:
+    context-path: /auth
+
