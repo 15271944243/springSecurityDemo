@@ -3,8 +3,7 @@ Oauth2.0 + JWT 流程:
 - client端用浏览器和Postman代替
 - 资源服务器通过访问授权服务器的check_token(/oauth/check_token)端点,
 来进行token校验
-- access_token为JWT(签名的key默认是随机字符串,存储在内存中:JwtAccessTokenConverter#signingKey)
-- 签名的key可以通过JwtAccessTokenConverter#setSigningKey配置
+- access_token为JWT,并配置JWK
 
 
 1. 浏览器访问授权服务器获取code

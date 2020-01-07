@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: oauth2-resource-server
+
+security:
+  oauth2:
+    client:
+      client-id: client01
+      client-secret: secret01
+    resource:
+      jwt:
+        key-uri: http://127.0.0.1:8079/auth/oauth/token_key
+
+#      resourceserver:
+#        jwt:
+#          jwk-set-uri: http://127.0.0.1:8079/auth/oauth/token_key
+
+server:
+  port: 8078
+  servlet:
+    context-path: /resource
