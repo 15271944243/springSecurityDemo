@@ -3,7 +3,6 @@ package learn.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -11,7 +10,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * 授权服务器配置
@@ -23,10 +23,19 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+//    private KeyPair keyPair;
+//
+//    private AuthenticationManager authenticationManager;
+
+
+//    public AuthorizationServerConfiguration(AuthenticationConfiguration authenticationConfiguration,
+//                                            KeyPair keyPair) throws Exception {
+//        this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
+//        this.keyPair = keyPair;
+//    }
+
 
     /**
      * 也可以在配置文件里进行配置
@@ -50,19 +59,29 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         /**
-         * 由于`/oauth/check_token`默认的访问权限是denyAll(),这里要改成认证成功后可访问权限:isAuthenticated()
+         * 由于`/oauth/token_key`、`/oauth/check_token`默认的访问权限是denyAll()
+         * 这里要改成认证成功后可访问权限:isAuthenticated()
          */
-        security.checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("isAuthenticated()").checkTokenAccess("isAuthenticated()");
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore());
+        endpoints
+//                .authenticationManager(this.authenticationManager)
+                .accessTokenConverter(accessTokenConverter())
+                .tokenStore(tokenStore());
     }
 
     @Bean
     public TokenStore tokenStore() {
-        return new RedisTokenStore(redisConnectionFactory);
+        return new JwtTokenStore(accessTokenConverter());
     }
 
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//        converter.setKeyPair(this.keyPair);
+        return converter;
+    }
 }

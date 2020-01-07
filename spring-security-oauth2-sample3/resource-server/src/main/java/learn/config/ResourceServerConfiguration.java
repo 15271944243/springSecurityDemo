@@ -29,4 +29,5 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         tokenServices.setClientSecret("secret01");
         return tokenServices;
     }
+
 }
