@@ -10,10 +10,10 @@ Oauth2.0 + JWT 流程:
 1. 浏览器访问授权服务器获取code
 2. Postman使用code访问授权服务器换取access_token
 3. 授权服务器生成access_token(JWT)
-3. Postman使用access_token访问资源服务器的资源
-4. 资源服务器携带access_token访问授权服务器的check_token(/oauth/check_token)端点
-5. 授权服务器校验token,校验通过,返回资源服务器Authentication
-6. 资源服务器允许client访问资源
+4. Postman使用access_token访问资源服务器的资源
+5. 资源服务器携带access_token访问授权服务器的check_token(/oauth/check_token)端点
+6. 授权服务器校验token,校验通过,返回资源服务器Authentication
+7. 资源服务器允许client访问资源
 
 #### 这里的token校验到底是如何处理的?
 这里只做了很简单的校验,比如:
