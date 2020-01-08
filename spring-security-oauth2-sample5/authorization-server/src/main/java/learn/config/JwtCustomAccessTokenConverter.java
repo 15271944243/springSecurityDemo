@@ -1,6 +1,8 @@
 package learn.config;
 
 import org.springframework.security.jwt.crypto.sign.RsaSigner;
+import org.springframework.security.oauth2.common.util.JsonParser;
+import org.springframework.security.oauth2.common.util.JsonParserFactory;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import java.security.KeyPair;
@@ -20,6 +22,16 @@ public class JwtCustomAccessTokenConverter extends JwtAccessTokenConverter {
 
     final RsaSigner signer;
 
+    private JsonParser objectMapper = JsonParserFactory.create();
+
+    /**
+     * First of all, we'll need to:
+     * - configure the parent class as we've been doing, setting up the KeyPair we configured
+     * - obtain a Signer object that uses the private key from the keystore
+     * - of course, a collection of custom headers we want to add to the structure
+     * @param customHeaders
+     * @param keyPair
+     */
     public JwtCustomAccessTokenConverter(Map<String, String> customHeaders, KeyPair keyPair) {
         super();
         super.setKeyPair(keyPair);
