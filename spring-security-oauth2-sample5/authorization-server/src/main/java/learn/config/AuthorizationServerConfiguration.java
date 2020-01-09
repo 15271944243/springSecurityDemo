@@ -21,6 +21,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Base64;
+import java.util.Collections;
+import java.util.Map;
 
 
 /**
@@ -37,6 +39,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private KeyPair keyPair;
+
+    private static final String KEY_ID = new String(Base64.getEncoder().encode(KeyGenerators.secureRandom(32).generateKey()));
 
 //    private AuthenticationManager authenticationManager;
 
@@ -87,12 +91,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setKeyPair(this.keyPair);
-        return converter;
+        Map<String, String> customHeaders = Collections.singletonMap("kid", KEY_ID);
+        return new JwtCustomAccessTokenConverter(customHeaders, this.keyPair);
     }
-
-    private static final String KEY_ID = new String(Base64.getEncoder().encode(KeyGenerators.secureRandom(32).generateKey()));
 
     @Bean
     public JWKSet jwkSet() {
