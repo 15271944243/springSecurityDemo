@@ -6,9 +6,10 @@ Oauth2.0 + JWT 流程:
 来获取JWT签名秘钥(即MAC)  
 - ResourceServerTokenServicesConfiguration#JwtTokenServicesConfiguration#getKeyFromServer
 
-1. 资源服务器启动时访问授权服务器的TokenKeyEndpoint(/oauth/token_key)
-获取JWT签名秘钥(即MAC)
-2. 浏览器访问授权服务器获取code
+0. authorize request http://127.0.0.1:8079/auth/oauth/authorize?response_type=code&client_id=client01&state=xyz123
+1. 浏览器访问授权服务器`AuthorizationEndpoint`
+2. 用户批准授权
+3. 用户登录,返回code
 3. Postman使用code访问授权服务器换取access_token
 4. 授权服务器生成access_token(JWT)
 5. Postman使用access_token访问资源服务器的资源

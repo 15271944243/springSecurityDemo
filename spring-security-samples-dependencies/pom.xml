@@ -19,6 +19,7 @@
         <!--<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <spring-boot-mapper.version>2.1.5</spring-boot-mapper.version>-->
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
+        <openid-connect.version>1.3.1</openid-connect.version>
     </properties>
 
     <dependencyManagement>
@@ -41,6 +42,13 @@
                 <artifactId>spring-security-oauth2-autoconfigure</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+            <!--<dependency>
+                <groupId>org.mitre</groupId>
+                <artifactId>openid-connect-parent</artifactId>
+                <version>${openid-connect.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>-->
             <dependency>
                 <groupId>com.nimbusds</groupId>
                 <artifactId>nimbus-jose-jwt</artifactId>

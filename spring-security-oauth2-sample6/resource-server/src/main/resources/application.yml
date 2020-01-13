@@ -1,6 +1,7 @@
 spring:
   application:
     name: oauth2-resource-server
+
 # 该配置无效(官网的配置)
 #  security:
 #    oauth2:

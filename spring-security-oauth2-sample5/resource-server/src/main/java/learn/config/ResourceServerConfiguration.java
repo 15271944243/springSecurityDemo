@@ -21,7 +21,11 @@ import org.springframework.security.oauth2.provider.token.store.jwk.JwkTokenStor
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-
+    /**
+     * 根据官网的java config配置无效,why?
+     * @param http
+     * @throws Exception
+     */
 //    @Override
 //    public void configure(HttpSecurity http) throws Exception {
 //        http
@@ -29,8 +33,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 //                    .anyRequest().authenticated()
 //                .and()
 //                .oauth2ResourceServer()
-//                    .jwt();
-////                        .jwkSetUri("http://127.0.0.1:8079/auth/.well-known/jwks.json");
+//                    .jwt()
+//                        .jwkSetUri("http://127.0.0.1:8079/auth/.well-known/jwks.json");
 //    }
 
 //    @Override
