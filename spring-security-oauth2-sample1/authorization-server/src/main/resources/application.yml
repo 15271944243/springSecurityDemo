@@ -10,3 +10,6 @@ server:
   servlet:
     context-path: /auth
 
+
+abc: xiaoxiaoxiang
+
