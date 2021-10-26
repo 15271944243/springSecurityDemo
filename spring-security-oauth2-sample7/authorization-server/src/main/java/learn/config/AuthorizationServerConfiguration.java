@@ -62,7 +62,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("app", "openid", "profile", "email", "address", "phone")
                 // 自动批准
                 .autoApprove("app")
-                .redirectUris("http://test.xhqb.com", "https://www.baidu.com");
+                .redirectUris("http://test.xxx.com", "https://www.baidu.com");
     }
 
     @Override
